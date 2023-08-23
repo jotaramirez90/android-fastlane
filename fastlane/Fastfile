@@ -25,22 +25,14 @@ end
 platform :android do
   desc "Runs pull-request lane"
   lane :'pull-request' do |options|
-    okClean(options)
-    okTestAnalyze(options)
-    okTestReport(options)
-    okBuild(options)
+    okClean()
+    okTestAnalyze()
+    okTestReport()
+    okBuild()
   end
 
   desc "Runs deploy lane"
   lane :deploy do
-    gradle_properties = {
-        "android.injected.version.code" => 2,
-        "android.injected.version.name" => "dummy",
-        "android.injected.signing.store.file" => options[:key_store],
-        "android.injected.signing.store.password" => options[:key_file_password],
-        "android.injected.signing.key.alias" => options[:key_alias],
-        "android.injected.signing.key.password" => options[:key_store_password]
-      }
     gradle(task: "clean assembleRelease")
   end
 end
@@ -48,17 +40,17 @@ end
 
 # ================ Gradle tasks ================
 
-def okClean(options)
+def okClean
     gradle(task: "clean")
 end
 
-def okTestAnalyze(options)
+def okTestAnalyze
     gradle(task: "detekt")
-    gradle(task: "lint", build_type: "#{options[:buildType]}")
-    gradle(task: "test", build_type: "#{options[:buildType]}")
+    gradle(task: "lint", build_type: "Debug")
+    gradle(task: "test", build_type: "Debug")
 end
 
-def okTestReport(options)
+def okTestReport
     gradle(task: "codeCoverageReport")
 #     sonar(
 #       project_key: "com.poc.android.fastlane",
@@ -71,5 +63,5 @@ def okTestReport(options)
 end
 
 def okBuild(options)
-    gradle(task: "bundle", build_type: "#{options[:buildType]}")
+    gradle(task: "bundle", build_type: "Debug")
 end
