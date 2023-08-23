@@ -13,16 +13,63 @@
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
 
+# ================ Platform ================
+
 default_platform(:android)
 
+before_all do |lane, options|
+  sh("brew install sonar-scanner")
+end
+
+# ================ Lanes ================
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
+  desc "Runs pull-request lane"
+  lane :'pull-request' do |options|
+    okClean(options)
+    okTestAnalyze(options)
+    okTestReport(options)
+    okBuild(options)
   end
 
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
+  desc "Runs deploy lane"
+  lane :deploy do
+    gradle_properties = {
+        "android.injected.version.code" => 2,
+        "android.injected.version.name" => "dummy",
+        "android.injected.signing.store.file" => options[:key_store],
+        "android.injected.signing.store.password" => options[:key_file_password],
+        "android.injected.signing.key.alias" => options[:key_alias],
+        "android.injected.signing.key.password" => options[:key_store_password]
+      }
     gradle(task: "clean assembleRelease")
   end
+end
+
+
+# ================ Gradle tasks ================
+
+def okClean(options)
+    gradle(task: "clean")
+end
+
+def okTestAnalyze(options)
+    gradle(task: "detekt")
+    gradle(task: "lint", build_type: "#{options[:buildType]}")
+    gradle(task: "test", build_type: "#{options[:buildType]}")
+end
+
+def okTestReport(options)
+    gradle(task: "codeCoverageReport")
+#     sonar(
+#       project_key: "com.poc.android.fastlane",
+#       project_version: "1.0",
+#       project_name: "android-fastlane",
+#       project_language: "kotlin",
+#       sonar_login: "sqa_ef79b1106ce43f36ece35764d9459994c08c6f93",
+#       sonar_url: "http://localhost:9000/"
+#     )
+end
+
+def okBuild(options)
+    gradle(task: "bundle", build_type: "#{options[:buildType]}")
 end

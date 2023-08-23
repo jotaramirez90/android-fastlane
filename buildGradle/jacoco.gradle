@@ -1,0 +1,81 @@
+apply plugin: 'jacoco'
+apply plugin: "org.sonarqube"
+
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDirectory.set(layout.buildDirectory.dir("${buildDir}/reports/jacoco"))
+}
+
+static def checkIfFolderExists(String folderName) {
+    def folder = new File(folderName)
+    return folder.exists()
+}
+
+def coverageMainSourceDirs = []
+def coverageKotlinClassDirectories = []
+def coverageExecutionDataFiles = []
+def coverageTestSourceDirs = []
+def coverageReportPaths = []
+
+def codeCoverageReportName = "codeCoverageReport"
+if (tasks.findByPath(codeCoverageReportName) == null) {
+    tasks.create(name: codeCoverageReportName, type: JacocoReport) {
+        group = "Reporting"
+        description = "Generate Jacoco coverage reports after running tests."
+
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            csv.required.set(false)
+        }
+
+        if (checkIfFolderExists("${projectDir}/src/main/java")) {
+            coverageMainSourceDirs.add("${projectDir}/src/main/java")
+        }
+        if (checkIfFolderExists("${buildDir}/tmp/kotlin-classes/debug")) {
+            coverageKotlinClassDirectories.add("${buildDir}/tmp/kotlin-classes/debug")
+        }
+        if (checkIfFolderExists("${buildDir}/tmp/kotlin-classes/debugUnitTest")) {
+            coverageKotlinClassDirectories.add("${buildDir}/tmp/kotlin-classes/debugUnitTest")
+        }
+        if (checkIfFolderExists("${buildDir}/jacoco/testDebugUnitTest.exec")) {
+            coverageExecutionDataFiles.add("${buildDir}/jacoco/testDebugUnitTest.exec")
+        }
+        if (checkIfFolderExists("${project.projectDir}/src/test/java")) {
+            coverageTestSourceDirs.add("${project.projectDir}/src/test/java")
+        }
+        if (checkIfFolderExists("${buildDir}/test-results/testDebugUnitTest")) {
+            coverageReportPaths.add("${buildDir}/test-results/testDebugUnitTest")
+        }
+
+        sourceDirectories.from = files(coverageMainSourceDirs)
+        classDirectories.from = files(coverageKotlinClassDirectories)
+        executionData.from = files(coverageExecutionDataFiles)
+    }
+}
+
+sonarqube {
+    properties {
+        if (!coverageMainSourceDirs.isEmpty()) {
+            property "sonar.sources", coverageMainSourceDirs.join(",")
+        }
+        if (!coverageMainSourceDirs.isEmpty()) {
+            property "sonar.java.binaries", coverageKotlinClassDirectories.join(",")
+        }
+        if (!coverageTestSourceDirs.isEmpty()) {
+            property "sonar.tests", coverageTestSourceDirs.join(",")
+        }
+        if (!coverageReportPaths.isEmpty()) {
+            property "sonar.junit.reportPaths", coverageReportPaths.join(",")
+        }
+        if (checkIfFolderExists("${buildDir}/reports/jacoco/codeCoverageReport/codeCoverageReport.xml")) {
+            property "sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
+        }
+        if (checkIfFolderExists("${buildDir}/reports/detekt/detekt.xml")) {
+            property "sonar.kotlin.detekt.reportPaths", "${buildDir}/reports/detekt/detekt.xml"
+        }
+        if (checkIfFolderExists("${buildDir}/reports/lint-results-debug.xml")) {
+            property "sonar.android.lint.reportPaths", "${buildDir}/reports/lint-results-debug.xml"
+        }
+    }
+}

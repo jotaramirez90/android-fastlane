@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000178">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: brew install sonar-scanner" time="74.446502">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: clean" time="1.09354">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: detekt" time="0.92244">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="4: lintDebug" time="5.606915">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="5: testDebug" time="1.610234">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="6: codeCoverageReport" time="1.136286">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: sonar" time="12.04092">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="8: bundleDebug" time="15.44684">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
