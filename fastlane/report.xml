@@ -5,42 +5,37 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000215">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000199">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: brew install sonar-scanner" time="2.138574">
+      <testcase classname="fastlane.lanes" name="1: brew install sonar-scanner" time="1.864148">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: clean" time="1.122055">
+      <testcase classname="fastlane.lanes" name="2: clean" time="1.288969">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: detekt" time="0.859015">
+      <testcase classname="fastlane.lanes" name="3: detekt" time="0.845093">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: lint" time="5.638798">
+      <testcase classname="fastlane.lanes" name="4: lintDebug" time="5.63741">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: test" time="3.445214">
+      <testcase classname="fastlane.lanes" name="5: testDebug" time="2.092973">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: codeCoverageReport" time="1.255592">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="7: bundle" time="11.590947">
+      <testcase classname="fastlane.lanes" name="6: codeCoverageReport" time="1.278848">
         
       </testcase>
     

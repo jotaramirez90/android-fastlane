@@ -17,9 +17,9 @@
 
 default_platform(:android)
 
-before_all do |lane, options|
-  sh("brew install sonar-scanner")
-end
+# before_all do |lane, options|
+#   sh("brew install sonar-scanner")
+# end
 
 # ================ Lanes ================
 platform :android do
