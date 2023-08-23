@@ -62,6 +62,6 @@ def okTestReport
 #     )
 end
 
-def okBuild(options)
+def okBuild
     gradle(task: "bundle", build_type: "Debug")
 end
