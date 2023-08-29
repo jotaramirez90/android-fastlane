@@ -17,9 +17,13 @@
 
 default_platform(:android)
 
-# before_all do |lane, options|
-#   sh("brew install sonar-scanner")
-# end
+before_all do |lane, options|
+  UI.message "Neutral message (usually white)"
+  UI.success "Successfully finished processing (usually green)"
+  UI.error "Wahaha, what's going on here! (usually red)"
+  UI.important "Make sure to use Windows (usually yellow)"
+  UI.header "Inputs" # a big box
+end
 
 # ================ Lanes ================
 platform :android do

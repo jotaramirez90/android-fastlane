@@ -1,0 +1,53 @@
+apply from: "${project.rootDir}/buildGradle/update/update.gradle"
+
+ext.gradleConfigPath = "${project.rootDir}/buildGradle"
+
+task downloadGradleDependenciesFile() {
+    doLast {
+        downloadFile(
+                getSourceUrl("update/update.gradle"),
+                "${gradleConfigPath}/update/update.gradle",
+                gradle_dependencies_override
+        )
+    }
+}
+
+task updateGradleDependenciesFile() {
+    doLast {
+        downloadFile(
+                getSourceUrl("update/update.gradle"),
+                "${gradleConfigPath}/update/update.gradle",
+                gradle_dependencies_override
+        )
+    }
+}
+
+task updateConfigFile() {
+    doLast {
+        downloadFile(
+                getSourceUrl("update/update.gradle"),
+                "${gradleConfigPath}/update/update.gradle",
+                gradle_dependencies_override
+        )
+    }
+}
+
+def downloadFile(String source, String destFile, Boolean isOverride) {
+    println("Downloading $destFile...")
+    download {
+        src source
+        dest destFile
+        overwrite isOverride
+    }
+    return destFile
+}
+
+ext.getSourceUrl = { filePath ->
+    def baseUrl = "https://git.ods.ok-cloud.net/projects/FRONTMC/repos/ok-android-dependencies/raw/$filePath"
+
+    if (releaseEnabled) {
+        baseUrl += "?at=refs%2Fheads%2Frelease%2F${releaseGroup}_${releaseVersion}"
+    }
+
+    return baseUrl
+}

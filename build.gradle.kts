@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.10" apply false
     id("io.gitlab.arturbosch.detekt").version("1.23.1")
     id("org.sonarqube") version "4.3.0.3225"
+    id("de.undercouch.download") version "5.5.0"
 }
 
 tasks.register("clean", Delete::class) {
