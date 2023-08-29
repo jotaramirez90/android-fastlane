@@ -1,0 +1,9 @@
+ext {
+    deployGroupId = 'com.poc.android.fastlane'
+    dependencyId = 'pocFastlane'
+    appName = 'androidFastlane'
+    sampleAppModuleName = 'sample'
+    releaseEnabled = false
+    releaseGroup = ""
+    releaseVersion = ""
+}

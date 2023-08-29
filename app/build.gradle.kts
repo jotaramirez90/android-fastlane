@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
-apply(from = "../buildGradle/jacoco.gradle")
+apply(from = "../gradleConfig/report/jacoco.gradle")
 
 android {
     namespace = "com.poc.android.fastlane"

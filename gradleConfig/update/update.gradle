@@ -1,0 +1,68 @@
+import groovy.transform.Canonical
+
+@Canonical
+class FileToDownload {
+    String source = ""
+    String destFile = ""
+    Boolean isOverride = true
+}
+
+def downloadFile(String source, String destFile, Boolean isOverride) {
+    println("Downloading $destFile...")
+    download {
+        src source
+        dest destFile
+        overwrite isOverride
+    }
+    return destFile
+}
+
+ext.createFileToDowload = { source, destFile, isOverride ->
+    return new FileToDownload(source, destFile, isOverride)
+}
+
+ext.concatenate = { filesToConcatenate, outputFilePath ->
+    println("Concat in $outputFilePath...")
+    def output = new File(outputFilePath)
+    output.write('')
+    filesToConcatenate.each { f -> output << f.text }
+}
+
+ext.combineVersionCatalogsFile = { filesToCombine, outputFilePath ->
+    println("Combine Version Catalogs file in $outputFilePath...")
+    def output = new File(outputFilePath)
+    output.write('')
+    combineVersionCatalogsSection("versions", filesToCombine, output)
+    combineVersionCatalogsSection("libraries", filesToCombine, output)
+    combineVersionCatalogsSection("bundles", filesToCombine, output)
+    combineVersionCatalogsSection("plugins", filesToCombine, output)
+}
+
+ext.combineVersionCatalogsSection = { sectionAlias, filesToCombine, output ->
+    def ls = System.getProperty("line.separator")
+    def sectionHeader = "[${sectionAlias}]"
+    output.append("${sectionHeader}${ls}")
+    filesToCombine.each { file ->
+        def startSection = false
+        def endSection = false
+        // Next section header is defined as [*].
+        def nextSectionHeaderPattern = "\\[(.*?)\\]"
+        file.eachLine { line ->
+            if (line.matches(nextSectionHeaderPattern) && startSection == true) {
+                endSection = true
+            }
+            if (line.contains(sectionHeader)) {
+                startSection = true
+            }
+            if (startSection == true && endSection == false && !line.contains(sectionHeader)) {
+                output.append("${line}${ls}")
+            }
+        }
+    }
+}
+
+ext.downloadFileList = { filesToDownload ->
+    filesToDownload.each { file ->
+        downloadFile(file.source, file.destFile, file.isOverride)
+    }
+}

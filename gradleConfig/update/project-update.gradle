@@ -1,11 +1,12 @@
-apply from: "${project.rootDir}/buildGradle/update/update.gradle"
+apply from: "${project.rootDir}/gradleConfig/update/config.gradle"
+apply from: "${project.rootDir}/gradleConfig/update/update.gradle"
 
 ext.gradleConfigPath = "${project.rootDir}/buildGradle"
 
 task downloadGradleDependenciesFile() {
     doLast {
         downloadFile(
-                getSourceUrl("update/update.gradle"),
+                getSourceUrl("build.gradle"),
                 "${gradleConfigPath}/update/update.gradle",
                 gradle_dependencies_override
         )
@@ -15,8 +16,8 @@ task downloadGradleDependenciesFile() {
 task updateGradleDependenciesFile() {
     doLast {
         downloadFile(
-                getSourceUrl("update/update.gradle"),
-                "${gradleConfigPath}/update/update.gradle",
+                getSourceUrl("build.gradle"),
+                "${gradleConfigPath}/update/build.gradle",
                 gradle_dependencies_override
         )
     }
@@ -25,8 +26,8 @@ task updateGradleDependenciesFile() {
 task updateConfigFile() {
     doLast {
         downloadFile(
-                getSourceUrl("update/update.gradle"),
-                "${gradleConfigPath}/update/update.gradle",
+                getSourceUrl("build.gradle"),
+                "${gradleConfigPath}/update/build.gradle",
                 gradle_dependencies_override
         )
     }
@@ -34,7 +35,7 @@ task updateConfigFile() {
 
 def downloadFile(String source, String destFile, Boolean isOverride) {
     println("Downloading $destFile...")
-    download {
+    download.run {
         src source
         dest destFile
         overwrite isOverride
@@ -43,7 +44,7 @@ def downloadFile(String source, String destFile, Boolean isOverride) {
 }
 
 ext.getSourceUrl = { filePath ->
-    def baseUrl = "https://git.ods.ok-cloud.net/projects/FRONTMC/repos/ok-android-dependencies/raw/$filePath"
+    def baseUrl = "https://raw.githubusercontent.com/jotaramirez90/Android-Kotlin-CleanArchitecture/master/$filePath"
 
     if (releaseEnabled) {
         baseUrl += "?at=refs%2Fheads%2Frelease%2F${releaseGroup}_${releaseVersion}"

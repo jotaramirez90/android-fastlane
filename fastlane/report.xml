@@ -5,37 +5,52 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000195">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000216">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: clean" time="1.277263">
+      <testcase classname="fastlane.lanes" name="1: clean" time="0.953791">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: detekt" time="0.884945">
+      <testcase classname="fastlane.lanes" name="2: downloadGradleDependenciesFile" time="1.080101">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: lintDebug" time="7.847309">
+      <testcase classname="fastlane.lanes" name="3: updateGradleDependenciesFile" time="1.055175">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: testDebug" time="1.826252">
+      <testcase classname="fastlane.lanes" name="4: cat ../gradle/libs.versions.toml" time="0.010255">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: codeCoverageReport" time="1.316036">
+      <testcase classname="fastlane.lanes" name="5: detekt" time="0.91068">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: bundleDebug" time="3.939085">
+      <testcase classname="fastlane.lanes" name="6: lintDebug" time="16.220607">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="7: testDebug" time="2.157006">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="8: codeCoverageReport" time="1.226528">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="9: bundleDebug" time="12.708956">
         
       </testcase>
     

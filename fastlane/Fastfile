@@ -30,6 +30,8 @@ platform :android do
   desc "Runs pull-request lane"
   lane :'pull-request' do |options|
     okClean()
+    okDependencies()
+    okResources()
     okTestAnalyze()
     okTestReport()
     okBuild()
@@ -46,6 +48,16 @@ end
 
 def okClean
     gradle(task: "clean")
+end
+
+def okDependencies
+    gradle(task: "downloadGradleDependenciesFile")
+    gradle(task: "updateGradleDependenciesFile")
+    sh("cat ../gradle/libs.versions.toml")
+end
+
+def okResources
+#    gradle(task: "downloadPoEditorXX")
 end
 
 def okTestAnalyze
@@ -68,4 +80,24 @@ end
 
 def okBuild
     gradle(task: "bundle", build_type: "Debug")
+end
+
+def okDeploy
+    gradle(
+        task: "publish",
+        properties: {
+            "nexusUser" => ENV['NEXUS_USERNAME'],
+            "nexusPass" => ENV['NEXUS_PASSWORD'],
+            "nexusVersion" => ENV['VERSION'],
+            "versionName" => ENV['VERSION'],
+        }
+    )
+    appcenter_upload(
+      api_token: ENV['ODS_DEV_TEST_HOCKEY_API_KEY'],
+      owner_name: "Dev-Test-ODS",
+      owner_type: "organization", # Default is user - set to organization for appcenter organizations
+      app_name: "mb-hb-android-feature-landing-openbankAr-stg",
+      file: ENV['BITRISE_MAPPING_PATH'],
+      notify_testers: true # Set to false if you don't want to notify testers of your new release (default: `false`)
+    )
 end
