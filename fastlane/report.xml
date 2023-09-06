@@ -5,52 +5,52 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000216">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000182">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: clean" time="0.953791">
+      <testcase classname="fastlane.lanes" name="1: clean" time="1.370972">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: downloadGradleDependenciesFile" time="1.080101">
+      <testcase classname="fastlane.lanes" name="2: downloadGradleDependenciesFile" time="1.433662">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: updateGradleDependenciesFile" time="1.055175">
+      <testcase classname="fastlane.lanes" name="3: updateGradleDependenciesFile" time="1.082479">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: cat ../gradle/libs.versions.toml" time="0.010255">
+      <testcase classname="fastlane.lanes" name="4: cat ../gradle/libs.versions.toml" time="0.023878">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: detekt" time="0.91068">
+      <testcase classname="fastlane.lanes" name="5: detekt" time="0.90341">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: lintDebug" time="16.220607">
+      <testcase classname="fastlane.lanes" name="6: lintDebug" time="7.15725">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: testDebug" time="2.157006">
+      <testcase classname="fastlane.lanes" name="7: testDebug" time="1.907353">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: codeCoverageReport" time="1.226528">
+      <testcase classname="fastlane.lanes" name="8: codeCoverageReport" time="1.166802">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="9: bundleDebug" time="12.708956">
+      <testcase classname="fastlane.lanes" name="9: bundleDebug" time="4.150355">
         
       </testcase>
     
