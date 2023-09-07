@@ -3,7 +3,7 @@ apply from: "${project.rootDir}/gradleConfig/update/update.gradle"
 
 ext.gradleConfigPath = "${project.rootDir}/buildGradle"
 
-task downloadGradleDependenciesFile2() {
+task downloadGradleDependenciesFile() {
     doLast {
         downloadFile(
                 getSourceUrl("build.gradle"),
