@@ -68,14 +68,14 @@ end
 
 def okTestReport
     gradle(task: "codeCoverageReport")
-#     sonar(
-#       project_key: "com.poc.android.fastlane",
-#       project_version: "1.0",
-#       project_name: "android-fastlane",
-#       project_language: "kotlin",
-#       sonar_login: "sqa_ef79b1106ce43f36ece35764d9459994c08c6f93",
-#       sonar_url: "http://localhost:9000/"
-#     )
+    sonar(
+      project_key: "com.poc.android.fastlane",
+      project_version: "1.0",
+      project_name: "android-fastlane",
+      project_language: "kotlin",
+      sonar_login: "sqa_ef79b1106ce43f36ece35764d9459994c08c6f93",
+      sonar_url: "http://localhost:9000/"
+    )
 end
 
 def okBuild
