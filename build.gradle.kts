@@ -15,3 +15,10 @@ tasks.register("clean", Delete::class) {
 }
 
 apply(from = "${project.rootDir}/gradleConfig/update/project-update.gradle")
+
+tasks.register<Exec>("downloadGradleDependenciesFile") {
+    commandLine("fastlane", "pull-request")
+    doLast {
+        println("Executed!")
+    }
+}
