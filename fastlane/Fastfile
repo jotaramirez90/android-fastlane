@@ -73,7 +73,7 @@ def okTestReport
       project_version: "1.0",
       project_name: "android-fastlane",
       project_language: "kotlin",
-      sonar_login: "sqa_ef79b1106ce43f36ece35764d9459994c08c6f93",
+      sonar_login: "",
       sonar_url: "http://localhost:9000/"
     )
 end
@@ -91,13 +91,5 @@ def okDeploy
             "nexusVersion" => ENV['VERSION'],
             "versionName" => ENV['VERSION'],
         }
-    )
-    appcenter_upload(
-      api_token: ENV['ODS_DEV_TEST_HOCKEY_API_KEY'],
-      owner_name: "Dev-Test-ODS",
-      owner_type: "organization", # Default is user - set to organization for appcenter organizations
-      app_name: "mb-hb-android-feature-landing-openbankAr-stg",
-      file: ENV['BITRISE_MAPPING_PATH'],
-      notify_testers: true # Set to false if you don't want to notify testers of your new release (default: `false`)
     )
 end
